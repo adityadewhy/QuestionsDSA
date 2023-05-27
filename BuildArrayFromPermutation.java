@@ -1,22 +1,13 @@
-public class BuildArrayFromPermutation {
-    public static void main(String[] args) {
-        int[] nums = {5,0,1,2,3,4};
-        System.out.println(int[] newArray);
+//https://leetcode.com/problems/build-array-from-permutation/submissions/958616442/
 
-    }
+class Solution {
     public int[] buildArray(int[] nums) {
+        int[] newnums = new int[nums.length];
 
-        //this will be the required array
-        int[] newArray = {};
-
-        //iterating through every element in the array and appending in the required array
-        for (int i = 0; i <= (nums.length - 1); i++) {
-            if(nums[i] == i){
-                newArray[i] = nums[i];
-            }else{
-                i++;
-            }
+        for(int i = 0; i<=(nums.length-1); i++){
+            newnums[i]=nums[nums[i]];
         }
-        return newArray;
+
+        return newnums;
     }
 }
