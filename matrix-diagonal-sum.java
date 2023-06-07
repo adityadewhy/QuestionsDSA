@@ -39,3 +39,21 @@ public int diagonalSum(int[][] mat) {
     return sum;
 }
 }
+
+################################################################
+# 40.8MB
+
+class Solution {
+    public int diagonalSum(int[][] mat) {
+        int sum=0;
+        for(int i=0;i<mat.length;i++)
+            sum+=mat[i][i];
+        for(int i=0;i<mat.length;i++){
+            if(i!=mat[0].length-1-i)
+                sum+=mat[i][mat[0].length-1-i];
+        }
+      
+        System.gc();
+        return sum;
+    }
+}
