@@ -1,147 +1,73 @@
-#https://leetcode.com/problems/spiral-matrix/
+https://leetcode.com/problems/spiral-matrix/submissions/968957463/
 
-// class Solution {
-//     public List<Integer> spiralOrder(int[][] matrix) {
-//         List<Integer> spiral = new ArrayList<>();
-//         int matlen = matrix.length;
-//         int collen = matrix[0].length;
+#140.3MB 0ms
 
-
-//         int temptop = 0;
-//         int tempright = collen;
-//         int tempbottom = matlen;
-//         int templeft = 0;
-
-//         while (spiral.size() <= matlen*collen){
-
-//             // top row left to right
-//             for(int i = temptop ; i < matlen/2 ; i++){
-//                 for(int j = templeft ; j < (tempright - 1) ; j++){
-//                     spiral.add(Integer.valueOf(matrix[i][j]));
-//                 }
-//                 temptop++;
-//                 break;
-//             }
-//             // Check if all elements have been visited
-//             if (spiral.size() >= matlen * collen) {
-//                 break;
-//             }
-
-//             // right column top to bottom
-//             for(int i = temptop ; i < matlen ; i++){
-//                 int j = tempright - 1;
-//                 while( j == (tempright-1)){
-//                     spiral.add(Integer.valueOf(matrix[i][j]));
-//                     j++;
-//                 }
-//             }
-//             tempright--;
-//             // Check if all elements have been visited
-//             if (spiral.size() >= matlen * collen) {
-//                 break;            
-//             }
-
-//             //right bottom to left bottom
-//             for(int i = (tempbottom-1) ; i > matlen/2 ; i++){
-//                 for(int j = (tempright-1) ; j >= templeft ; j++){
-//                     spiral.add(Integer.valueOf(matrix[i][j]));
-//                 }
-//                 tempbottom--;
-//                 break;
-//             }
-//             // Check if all elements have been visited
-//             if (spiral.size() >= matlen * collen) {
-//                 break; 
-//             }
-
-//             //bottom left to top left
-//             for(int i = (tempbottom-1) ; i > temptop ; i++){
-//                 int j = templeft;
-//                 while(j == templeft){
-//                     spiral.add(Integer.valueOf(matrix[i][j]));
-//                     j++;
-//                 }
-//             }
-//             templeft++;
-//             // Check if all elements have been visited
-//             if (spiral.size() >= matlen * collen) {
-//                 break; 
-//         }
-//     }
-//     return spiral;
-// }
-// }
-
-class Solution {
-    public List<Integer> spiralOrder(int[][] matrix) {
-        List<Integer> spiral = new ArrayList<>();
-        int matlen = matrix.length;
-        int collen = matrix[0].length;
-
-        int temptop = 0;
-        int tempright = collen;
-        int tempbottom = matlen;
-        int templeft = 0;
-
-        while (spiral.size() < matlen * collen) {
-            // top row left to right
-            for (int i = temptop; i < matlen / 2; i++) {
-                for (int j = templeft; j <= (tempright - 1); j++) {
-                    spiral.add(Integer.valueOf(matrix[i][j]));
-                }
-                temptop++;
-                break;
-            }
+class Solution{
+        public List<Integer> spiralOrder(int[][] matrix) {
+            List<Integer> spiral = new ArrayList<>();
+            int matlen = matrix.length;
+            int collen = matrix[0].length;
+            int totalElements = matlen * collen;
             
-            // Check if all elements have been visited
-            if (spiral.size() >= matlen * collen) {
-                break;
-            }
-
-            // right column top to bottom
-            for (int i = temptop; i < matlen; i++) {
-                int j = tempright - 1;
-                while (j >= templeft) {
-                    spiral.add(Integer.valueOf(matrix[i][j]));
-                    j--;
+            int itop = 0;
+            int ibottom = matlen-1;
+            int iright = collen-1;
+            int ileft = 0;
+            
+            while (spiral.size() < totalElements) {
+                
+                //top left to top right
+                while(true){
+                    for(int i = ileft ; i <= iright ; i++) {
+                        spiral.add(Integer.valueOf(matrix[itop][i]));
+                    }
+                    itop++;
+                    break;
+                }
+                //check if all elements have been added
+                if (spiral.size() >= totalElements){
+                    break;
+                }
+                
+                //top right to bottom right
+                while(true){
+                    for(int i = itop ; i <= ibottom ; i++){
+                        spiral.add(Integer.valueOf(matrix[i][iright]));
+                    }
+                    iright--;
+                    break;
+                }
+                //check if all elements have been added
+                if (spiral.size() >= totalElements){
+                    break;
+                }
+                
+                //bottom right to bottom left
+                while(true){
+                    for (int i = iright ; i >= ileft ; i--){
+                        spiral.add(Integer.valueOf(matrix[ibottom][i]));
+                    }
+                    ibottom--;
+                    break;
+                }
+                //check if all elements have been added
+                if (spiral.size() >= totalElements){
+                    break;
+                }
+                
+                //bottom left to top left
+                while(true){
+                    for (int i = ibottom ; i >= itop ; i--){
+                        spiral.add(Integer.valueOf(matrix[i][ileft]));
+                    }
+                    ileft++;
+                    break;
+                }
+                //check if all elements have been added
+                if (spiral.size() >= totalElements){
+                    break;
                 }
             }
-            tempright--;
-            
-            // Check if all elements have been visited
-            if (spiral.size() >= matlen * collen) {
-                break;
-            }
-
-            // right bottom to left bottom
-            for (int i = (tempbottom - 1); i > matlen / 2; i++) {
-                for (int j = (tempright - 1); j >= templeft; j--) {
-                    spiral.add(Integer.valueOf(matrix[i][j]));
-                }
-                tempbottom--;
-                break;
-            }
-            
-            // Check if all elements have been visited
-            if (spiral.size() >= matlen * collen) {
-                break;
-            }
-
-            // bottom left to top left
-            for (int i = (tempbottom - 1); i > temptop; i--) {
-                int j = templeft;
-                while (j == templeft) {
-                    spiral.add(Integer.valueOf(matrix[i][j]));
-                    j++;
-                }
-            }
-            templeft++;
-            
-            // Check if all elements have been visited
-            if (spiral.size() >= matlen * collen) {
-                break;
-            }
+            return spiral;
         }
-        return spiral;
     }
-}
