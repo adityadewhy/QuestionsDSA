@@ -41,14 +41,13 @@ class Solution {
         boolean isrow0 = false;
         boolean iscol0 = false;
 
-        for(int i = 0 ; i < rows ; i++){
-            if(matrix[0][i] == 0){
+        for(int col = 0 ; col < cols ; col++){
+            if(matrix[0][col] == 0){
                 isrow0 = true;
             }
         }
-
-        for(int i = 0 ; i < cols ; i++){
-            if(matrix[i][0] == 0){
+        for(int row = 0 ; row < rows ; row++){
+            if(matrix[row][0] == 0){
                 iscol0 = true;
             }
         }
@@ -64,22 +63,19 @@ class Solution {
 
         for(int i = 1 ; i < rows ; i++){
             for(int j = 1 ; j < cols ; j++){
-                if(matrix[0][i] == 0){
-                    matrix[i][j] = 0;
-                }
-                if(matrix[j][0] == 0){
+                if(matrix[0][j] == 0 || matrix[i][0] == 0){
                     matrix[i][j] = 0;
                 }
             }
         }
 
         if(isrow0 == true){
-            for(int i = 0; i < rows ; i++){
+            for(int i = 0; i < cols ; i++){
                 matrix[0][i] = 0;
             }
         }
         if(iscol0 == true){
-            for(int i = 0; i < cols ; i++){
+            for(int i = 0; i < rows ; i++){
                 matrix[i][0] = 0;
             }
         }
